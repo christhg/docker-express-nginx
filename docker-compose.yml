@@ -1,0 +1,21 @@
+version: "3"
+services:
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    links:
+      - node
+    ports:
+      - 80:80
+  node:
+    build:
+      context: ./server
+
+#nginx：這個名字與 node 一樣，是可以自由取的。
+#node：在剛剛 default.confg 中的 node 就是指此，綁定它在 nginx 容器中所分配到的 ip。
+#image：我們這邊其實是又建立另一個容器為 nginx。
+#volumes：掛載檔案的腳本語言法，我們將外部的 nginx: (所有) 掛載到 /etc/nginx/conf.d/ 底下所有
+#links：我們將 node 容器與 nginx 關聯起來。
+#port：內部的 80 port 映射到外部的 80port
+#build：部署的檔案則會尋找 ./server 目錄中的 Dockerfile
