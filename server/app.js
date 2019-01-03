@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));//设置vue項目的production環境，静态文件路径
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
